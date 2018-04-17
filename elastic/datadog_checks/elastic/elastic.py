@@ -2,19 +2,21 @@
 # All rights reserved
 # Licensed under Simplified BSD License (see LICENSE)
 
-# stdlib
 from collections import defaultdict, namedtuple
 import time
 import urlparse
-
-# 3p
 import requests
-
-# project
-from checks import AgentCheck
-from config import _is_affirmative
-from util import headers
-
+from datadog_checks.checks import AgentCheck
+# compatability layer
+try:
+    from config import _is_affirmative
+except ImportError:
+    from datadog_checks.config import _is_affirmative
+# compatability layer
+try:
+    from util import headers
+except ImportError:
+    from datadog_checks.utils.headers import headers
 
 class NodeNotFound(Exception):
     pass
